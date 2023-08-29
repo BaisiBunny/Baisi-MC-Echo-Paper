@@ -1,0 +1,4 @@
+name: Baisi-MC-Echo-Paper
+main: tech.baisi.mc.echo.paper.Entrance
+version: 1.0
+api-version: "1.20"

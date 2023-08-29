@@ -7,13 +7,14 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 public class RabbitMQManager {
-//    private RabbitMQManager rabbitMQManager;
     private ConnectionFactory connectionFactory;
     private Connection connection;
     private Channel channel;
-//    public RabbitMQManager getInstance(){
-//        return this;
-//    }
+    private Entrance entrance;
+
+    public RabbitMQManager(Entrance entrance) {
+        this.entrance = entrance;
+    }
 
     public void init() throws IOException, TimeoutException {
         connectionFactory = new ConnectionFactory();
@@ -32,7 +33,16 @@ public class RabbitMQManager {
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
                 //
                 String message = new String(body);
-                Bukkit.getLogger().info(message);
+                executeMsg(message);
+            }
+        });
+    }
+
+    private void executeMsg(String  msg){
+        Bukkit.getScheduler().runTask(entrance, new Runnable() {
+            @Override
+            public void run() {
+                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),msg);
             }
         });
     }

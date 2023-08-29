@@ -14,7 +14,7 @@ public class Entrance extends JavaPlugin {
         Bukkit.getLogger().info("插件运行成功！");
 
         //测试
-        rabbitMQManager = new RabbitMQManager();
+        rabbitMQManager = new RabbitMQManager(this);
         try {
             rabbitMQManager.init();
         } catch (IOException | TimeoutException e) {

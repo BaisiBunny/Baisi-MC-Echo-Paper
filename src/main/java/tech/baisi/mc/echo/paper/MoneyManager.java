@@ -18,27 +18,31 @@ public class MoneyManager {
     public void checkActive(){ //1小时 -> 1k硬币; 15min-250; 5min-250/3;
         List<Player> players = (List<Player>) Bukkit.getOnlinePlayers();
         if(players.isEmpty()){
+//            Bukkit.getLogger().info("nop");
             return;
         }
+//        Bukkit.getLogger().info("check");
         for(Player p : players){
             if(!playerLocation.containsKey(p)){
                 playerLocation.put(p,p.getLocation());
-//                Bukkit.getLogger().info("new");
+//                Bukkit.getLogger().info("fail");
             }else {
-//                Bukkit.getLogger().info("old");
-                if(p.getLocation().distanceSquared(playerLocation.get(p)) >= 100){
-//                    Bukkit.getLogger().info("yes");
-                    if(Math.random() > 0.666){
-//                        Bukkit.getLogger().info("yes2");
-                        mySQLManager.addMoney(p.getName(),250);
-                    }
-//                    else {
-//                        Bukkit.getLogger().info("no2");
-//                    }
+                if(p.getLocation().getWorld() != playerLocation.get(p).getWorld()){
+                    // give 250/3 coin
+                    mySQLManager.addMoney(p.getName(),(int)(Math.random()*166.7));
                 }
-//                else {
-//                    Bukkit.getLogger().info("no");
-//                }
+                else {
+                    if(p.getLocation().distanceSquared(playerLocation.get(p)) >= 100){
+                        // give 250/3 coin
+                        mySQLManager.addMoney(p.getName(),(int)(Math.random()*166.7));
+//                    Bukkit.getLogger().info("1");
+                    }else{
+                        // give 50/3 coin
+                        mySQLManager.addMoney(p.getName(),(int)(Math.random()*33.4));
+//                    Bukkit.getLogger().info("2");
+                    }
+                }
+
                 playerLocation.replace(p,p.getLocation());
             }
         }

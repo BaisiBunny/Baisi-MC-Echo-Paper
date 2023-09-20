@@ -56,6 +56,7 @@ public class MySQLManager {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        Entrance.gdp = Entrance.gdp + add_money;
     }
 
 }

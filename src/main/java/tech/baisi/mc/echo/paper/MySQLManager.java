@@ -59,4 +59,17 @@ public class MySQLManager {
         Entrance.gdp = Entrance.gdp + add_money;
     }
 
+    public int getMoney(String name){
+        try {
+            ResultSet resultSet = statement.executeQuery("SELECT money FROM mc.`user` WHERE name='"+name+"'");
+            int old_money = 0;
+            while (resultSet.next()){
+                old_money = resultSet.getInt("money");
+            }
+            return old_money;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

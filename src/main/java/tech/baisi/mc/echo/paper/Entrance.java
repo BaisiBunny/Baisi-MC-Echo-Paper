@@ -50,6 +50,7 @@ public class Entrance extends JavaPlugin {
         //register
         Bukkit.getPluginManager().registerEvents(new PlayerPreLogin(mySQLManager), this);
         Bukkit.getPluginCommand("coin").setExecutor(new CommandManager(mySQLManager));
+        Bukkit.getPluginCommand("yz").setExecutor(new YaZhuManager(mySQLManager));
 
         //task
         moneyManager = new MoneyManager(mySQLManager);

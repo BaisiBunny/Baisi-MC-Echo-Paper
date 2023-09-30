@@ -10,8 +10,8 @@ import java.util.Map;
 
 public class MoneyManager {
 
-    private MySQLManager mySQLManager;
-    private Map<Player,Location> playerLocation = new HashMap<>();
+    private final MySQLManager mySQLManager;
+    private final Map<Player,Location> playerLocation = new HashMap<>();
     public MoneyManager(MySQLManager mySQLManager){
         this.mySQLManager = mySQLManager;
     }

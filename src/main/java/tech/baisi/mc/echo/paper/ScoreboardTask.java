@@ -45,7 +45,7 @@ public class ScoreboardTask {
             }
         }
 
-        Score score = objective.getScore("GDP(Coin)");
+        Score score = objective.getScore("硬币发放");
         score.setScore(Entrance.gdp);
     }
 
